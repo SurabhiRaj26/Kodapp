@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const { db, generateAccountNumber } = require('./database');
 
 const app = express();
-const PORT = 5000;
-const SECRET_KEY = 'your-secret-key'; // Ideally in .env
+const PORT = process.env.PORT || 5000;
+const SECRET_KEY = process.env.JWT_SECRET || 'KodBank_Secret_Key_2026';
 
 app.use(express.json());
 app.use(cors());
