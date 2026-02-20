@@ -283,8 +283,8 @@ app.post('/logout', authenticateToken, (req, res) => {
 // ─── Serve React Frontend (Production) ──────────────────────────────
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
-// Catch-all: send React's index.html for any non-API route
-app.get('*', (req, res) => {
+// Catch-all: send React's index.html for any non-API route (Express v5 syntax)
+app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
