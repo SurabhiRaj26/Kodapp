@@ -18,7 +18,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/register', {
+            const response = await axios.post(`${import.meta.env.DEV ? 'http://localhost:5000' : ''}/register`, {
                 name, email, password, phone
             });
             setSuccess({

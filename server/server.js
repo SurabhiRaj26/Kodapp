@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const path = require('path');
 const { db, generateAccountNumber } = require('./database');
 
 const app = express();
@@ -277,6 +278,14 @@ app.post('/logout', authenticateToken, (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ message: "Logged out successfully" });
     });
+});
+
+// ─── Serve React Frontend (Production) ──────────────────────────────
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+
+// Catch-all: send React's index.html for any non-API route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.DEV ? 'http://localhost:5000' : '';
 
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('overview');
